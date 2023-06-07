@@ -34,13 +34,17 @@ def main():
             ### JSON:
             """
         try:
+            print("Running API: ", data)
             res = run_api(data)
             os.remove(filename)
             response_json = json.loads(res)
+            with open('res.json', 'w') as f:
+                json.dump(data, f)
 
             return jsonify(response_json), 200
         except Exception as e:
             # Handle the exception and return an error response
+            print(e)
             error_message = str(e)
             return jsonify({'error': error_message}), 500
     else:
